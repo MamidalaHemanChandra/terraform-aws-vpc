@@ -71,7 +71,3 @@ variable "nat_tags" {
   type = map
   default = {}
 }
-
-variable "is_perring_requried" {
-  type = bool
-}
