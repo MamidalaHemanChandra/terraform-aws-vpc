@@ -1,6 +1,7 @@
 resource "aws_vpc_peering_connection" "roboshop" {
-  peer_vpc_id   = data.aws_vpc.default.id
-  vpc_id        = aws_vpc.main.id
+  count = var.peering_required ? 1 : 0
+  peer_vpc_id   = data.aws_vpc.default.id 
+  vpc_id        = aws_vpc.main.id 
 
   accepter {
     allow_remote_vpc_dns_resolution = true
@@ -13,7 +14,7 @@ resource "aws_vpc_peering_connection" "roboshop" {
   auto_accept   = true
 
   tags = merge(
-    var.nat_tags,
+    var.peering_tags,
     local.common_tags,
     {
       Name = "${local.common_name}"
