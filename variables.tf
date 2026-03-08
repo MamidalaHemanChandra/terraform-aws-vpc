@@ -79,5 +79,5 @@ variable "peering_required" {
 
 variable "peering_tags" {
   type = map
-  default = {}
+  default = true
 }

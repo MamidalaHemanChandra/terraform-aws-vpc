@@ -26,12 +26,12 @@ resource "aws_route" "public" {
     count = var.peering_required ? 1 : 0
   route_table_id            = aws_route_table.public.id
   destination_cidr_block    = data.aws_vpc.default.cidr_block
-  vpc_peering_connection_id = aws_vpc_peering_connection.roboshop[0].id
+  vpc_peering_connection_id = aws_vpc_peering_connection.roboshop[count.index].id
 }
 
 resource "aws_route" "default" {
     count = var.peering_required ? 1 : 0
   route_table_id            = data.aws_route_table.default.id
   destination_cidr_block    = var.vpc_cidr_block
-  vpc_peering_connection_id = aws_vpc_peering_connection.roboshop[0].id
+  vpc_peering_connection_id = aws_vpc_peering_connection.roboshop[count.index].id
 }
